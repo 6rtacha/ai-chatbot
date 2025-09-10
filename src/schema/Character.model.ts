@@ -15,6 +15,17 @@ const characterSchema = new Schema(
     characterImage: {
       type: String,
     },
+
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+
+    isDefault: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

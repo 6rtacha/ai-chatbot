@@ -22,12 +22,6 @@ class AuthService {
       );
     });
   }
-
-  public async checkAuth(token: string): Promise<User> {
-    const result: User = (await jwt.verify(token, this.secretToken)) as User;
-    console.log(`---- [Auth] memberNick: ${result.userName}----`);
-    return result;
-  }
 }
 
 export default AuthService;

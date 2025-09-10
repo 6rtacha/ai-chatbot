@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { T } from "@/libs/types/common";
+import { T } from "../libs/types/common";
 import UserService from "../models/User.service";
-import { User, UserInput } from "../libs/types/user";
+import { ExtendedRequest, User, UserInput } from "../libs/types/user";
 import AuthService from "../models/Auth.service";
+import jwt from "jsonwebtoken";
 
 const userService = new UserService();
 const authService = new AuthService();
@@ -20,7 +21,6 @@ userController.signup = async (req: Request, res: Response) => {
   try {
     const newUser: UserInput = req.body;
     console.log("body:", req.body);
-    const userService = new UserService();
     const result: User = await userService.signup(newUser);
     const token = await authService.createToken(result);
     res.send(result);
@@ -42,7 +42,7 @@ userController.login = async (req: Request, res: Response) => {
       httpOnly: false,
     });
 
-    res.status(200).json({ member: result, accessToken: token });
+    res.status(200).json({ user: result, accessToken: token });
   } catch (error) {
     console.log("Error", error);
   }

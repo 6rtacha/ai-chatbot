@@ -4,6 +4,7 @@ const userSchema = new Schema(
   {
     userName: {
       type: String,
+      index: { unique: true, sparse: true },
       required: true,
     },
 

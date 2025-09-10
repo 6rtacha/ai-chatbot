@@ -10,8 +10,13 @@ export interface User {
 }
 
 export interface UserInput {
-  _id: ObjectId;
   userName: string;
   userPassword: string;
   userImage?: string;
+}
+
+export interface ExtendedRequest extends Request {
+  user?: User;
+  file?: Express.Multer.File;
+  cookies: Record<string, string>;
 }
