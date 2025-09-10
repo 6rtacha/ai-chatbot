@@ -1,4 +1,3 @@
-// models/Conversation.model.ts
 import mongoose, { Schema, Document } from "mongoose";
 
 interface IMessage {
